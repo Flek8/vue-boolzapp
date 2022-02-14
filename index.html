@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolzapp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <div class="container" id="app">
+
+        <div class="section-left">
+
+            <div class="header">
+                <div class="user">
+                    <img src="img/avatar_io.jpg" height="40" alt="img profilo utente">
+                    <h5>Nome Utente</h5>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-notch"></i>
+                    <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+
+            <div class="main">
+
+                <div class="notifications">
+                    <span class="bell"><i class="fa-solid fa-bell-slash"></i></span>
+                    <div class="text">
+                        <p>Ricevi notifiche di nuovi messaggi</p>
+                        <span>Attiva notifiche desktop</span>
+                    </div>
+                </div>
+
+                <div class="search">
+                    <div class="box">
+                        <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                </div>
+
+                <div class="chats" v-for="(elemento, indice) in contacts" @click="cambiaChat(elemento)">
+                    <div class="row">
+                        <div class="img">
+                            <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
+                        </div>
+
+                        <div class="contact">
+                            <h3>{{elemento.name}}</h3>
+                            <span>{{elemento.messages[elemento.messages.length - 1].text}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-right" v-for="(elemento, indice) in contacts" :class="elemento.visible == true?'show':'hide'">
+            <div class="header">
+                <div id="info-contatto">
+                    <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
+                    <div>
+                        <span>{{elemento.name}}</span> <br>
+                        <span>Ultimo accesso</span>
+                        <span></span>
+                    </div>  
+                </div>
+                <div>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+                
+            </div>
+
+            <div class="messages" >
+                <div class="msg-line" v-for="(msg,index) in elemento.messages">
+                    <div class="msg" :class="msg.status == 'sent'?'msg-sent':'msg-received'">
+                        <span>{{msg.text}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="type-bar">
+                <i class="fa-regular fa-face-smile"></i>
+                <input type="text">
+                <i class="fa-regular fa-microphone"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
