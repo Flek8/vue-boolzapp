@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="chats" v-for="(elemento, indice) in contacts" @click="cambiaChat(elemento)">
+                <div class="chats" v-for="(elemento, indice) in contacts" @click="cambiaChat(elemento)" :class="elemento.visible == true?'active':''">
                     <div class="row">
                         <div class="img">
                             <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
@@ -88,8 +88,8 @@
 
             <div class="type-bar">
                 <i class="fa-regular fa-face-smile"></i>
-                <input type="text">
-                <i class="fa-regular fa-microphone"></i>
+                <input type="text" placeholder="Scrivi un messaggio">
+                <i class="fa-solid fa-microphone"></i>
             </div>
         </div>
     </div>
