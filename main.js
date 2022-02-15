@@ -3,12 +3,14 @@ const vue = new Vue (
         el:'#app',
         data: {
             newMessage: '',
+            chatFilter: '',
             utenteAttivo: '',
             contacts: [
                 {
                     name: 'Michele',
                     avatar: '_1',
                     visible: false,
+                    filtered: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -31,6 +33,7 @@ const vue = new Vue (
                     name: 'Fabio',
                     avatar: '_2',
                     visible: false,
+                    filtered: false,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -53,6 +56,7 @@ const vue = new Vue (
                     name: 'Samuele',
                     avatar: '_3',
                     visible: false,
+                    filtered: false,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -75,6 +79,7 @@ const vue = new Vue (
                     name: 'Luisa',
                     avatar: '_4',
                     visible: false,
+                    filtered: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -95,6 +100,41 @@ const vue = new Vue (
                 utenteAttivo.visible = false;
                 el.visible = true;
                 utenteAttivo = el;
+            },
+            inviaMessaggio(el) {
+                if (this.newMessage != '') {
+                    let messageObj = {
+                        date: '',
+                        text: this.newMessage,
+                        status: 'sent',
+                    }
+                    el.messages.push(messageObj);
+                    this.newMessage = '';
+                    el2 = el
+                    this.rispondiMessaggio(el2);
+                }
+            },
+            rispondiMessaggio(par) {
+                setTimeout(function() {
+                    let rispostaObj = {
+                        date: '',
+                        text: 'Ok',
+                        status: 'received'
+                    }
+                    par.messages.push(rispostaObj);}, 1000)
+            },
+            filtraChat() {
+                let nominativo;
+                let filtro;
+                for (let i = 0; i < this.contacts.length; i++) {
+                    nominativo = this.contacts[i].name.toLowerCase();
+                    filtro = this.chatFilter.toLowerCase();
+                    if (filtro != '' && !nominativo.includes(filtro)) {
+                        this.contacts[i].filtered = true;
+                    } else {
+                        this.contacts[i].filtered = false;
+                    }
+                }
             }
         },
         mounted: function() {

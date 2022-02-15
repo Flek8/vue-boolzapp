@@ -40,23 +40,23 @@
                 <div class="search">
                     <div class="box">
                         <span><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="chatFilter" @input="filtraChat">
                     </div>
                 </div>
+                <div id="chat-list">
+                    <div class="chats" v-for="(elemento, indice) in contacts" @click="cambiaChat(elemento)" :class="elemento.visible == true?'active':''">
+                        <div :class="elemento.filtered == true?'hide':'row'">
+                            <div class="img">
+                                <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
+                            </div>
 
-                <div class="chats" v-for="(elemento, indice) in contacts" @click="cambiaChat(elemento)" :class="elemento.visible == true?'active':''">
-                    <div class="row">
-                        <div class="img">
-                            <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
-                        </div>
-
-                        <div class="contact">
-                            <h3>{{elemento.name}}</h3>
-                            <span>{{elemento.messages[elemento.messages.length - 1].text}}</span>
+                            <div class="contact">
+                                <h3>{{elemento.name}}</h3>
+                                <span>{{elemento.messages[elemento.messages.length - 1].text}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                     <img :src="'img/avatar' + elemento.avatar + '.jpg'" height="40" alt="immagine profilo contatto">
                     <div>
                         <span>{{elemento.name}}</span> <br>
-                        <span>Ultimo accesso</span>
+                        <span id="lastAccess">Ultimo accesso {{elemento.messages[elemento.messages.length - 1].date}}</span>
                         <span></span>
                     </div>  
                 </div>
@@ -81,14 +81,15 @@
             <div class="messages" >
                 <div class="msg-line" v-for="(msg,index) in elemento.messages">
                     <div class="msg" :class="msg.status == 'sent'?'msg-sent':'msg-received'">
-                        <span>{{msg.text}}</span>
+                        <span>{{msg.text}}</span> <br>
+                        <p>{{msg.date}}</p>
                     </div>
                 </div>
             </div>
 
             <div class="type-bar">
                 <i class="fa-regular fa-face-smile"></i>
-                <input type="text" placeholder="Scrivi un messaggio">
+                <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="inviaMessaggio(elemento)">
                 <i class="fa-solid fa-microphone"></i>
             </div>
         </div>

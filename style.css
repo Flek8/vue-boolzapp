@@ -11,6 +11,7 @@ body {
 
 .container {
     width: 70%;
+    min-width: 1000px;
     height: 90vh;
     margin: 5vh auto;
 }
@@ -95,6 +96,7 @@ img {
 .notifications span {
     color: gray;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .bell {
@@ -145,13 +147,16 @@ img {
 .chats {
     display: flex;
     flex-direction: column;
-    padding: 10px 15px;
-    border-top: 1px solid lightgray;
     
+}
+#chat-list {
+    overflow-y: auto;
 }
 .row {
     display: flex;
     align-items: center;
+    padding: 10px 15px;
+    border-top: 1px solid lightgray;
 }
 .contact {
     display: flex;
@@ -159,8 +164,14 @@ img {
     justify-content: flex-start;
 }
 
+#lastAccess {
+    color: grey;
+    font-size: 12px;
+}
+
 .messages {
     padding: 20px 30px;
+    overflow-y: auto;
 }
 .msg-line {
     margin-bottom: 5px;
@@ -174,6 +185,20 @@ img {
 .msg {
     padding: 10px 15px;
     width: fit-content;
+    min-width: 35%;
+}
+.msg::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.msg p {
+    float: right;
+    color: gray;
+    font-size: 8px;
+}
+.msg span {
+    margin-right: 15px;
 }
 
 .msg-sent {
