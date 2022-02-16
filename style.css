@@ -1,3 +1,4 @@
+/* Regole generali */
 * {
     margin: 0;
     padding: 0;
@@ -21,6 +22,8 @@ body {
     clear: both;
 }
 
+
+/* Regole per le sezioni */
 .section-left {
     width: 35%;
     height: 100%;
@@ -38,6 +41,7 @@ body {
     position: relative;
 }
 
+/* Regole per gli header*/
 .header {
     height: 60px;
     background-color: #EAEAEA;
@@ -69,6 +73,7 @@ img {
     cursor: pointer;
 }
 
+/* Regole classi aggiuntive dinaminche*/
 .active {
     background-color: #cbd3d6;
 }
@@ -81,12 +86,9 @@ img {
     display: none;
 }
 
-#info-contatto {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
 
+/* Regole per la sezione di sinistra*/
+/* Gestione notifiche*/
 .notifications {
     background-color: #9FD8F8;
     padding: 10px;
@@ -123,6 +125,7 @@ img {
     text-decoration: underline;
 }
 
+/* Ricerca contatti */
 .search {
     padding: 10px;
 }
@@ -144,12 +147,15 @@ img {
     padding: 10px;
 }
 
+
+/* lista delle chat */
 .chats {
     display: flex;
     flex-direction: column;
     
 }
 #chat-list {
+    height: calc(90vh - 185px);
     overflow-y: auto;
 }
 .row {
@@ -157,11 +163,39 @@ img {
     align-items: center;
     padding: 10px 15px;
     border-top: 1px solid lightgray;
+    position: relative;
+
 }
 .contact {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.contact span {
+    color: grey;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+.row p {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    font-size: 10px;
+    color: grey;
+}
+
+
+
+/* Regole per la sezione di destra*/
+/* Interfaccia dei messaggi*/
+
+#info-contatto {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #lastAccess {
@@ -172,6 +206,7 @@ img {
 .messages {
     padding: 20px 30px;
     overflow-y: auto;
+    height: calc(90vh - 100px);
 }
 .msg-line {
     margin-bottom: 5px;
@@ -186,6 +221,7 @@ img {
     padding: 10px 15px;
     width: fit-content;
     min-width: 35%;
+    position: relative;
 }
 .msg::after {
     content: '';
@@ -200,6 +236,24 @@ img {
 .msg span {
     margin-right: 15px;
 }
+.msg i {
+    display: none;
+    box-shadow: -10px 10px 10px #DDF8C0;
+    background-color: #DDF8C0;
+    color: gray;
+    font-size: 24px;
+    z-index: 99;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.msg i:hover {
+    cursor: pointer;
+}
+.msg:hover i {
+    display: block;
+}
 
 .msg-sent {
     background-color: #DDF8C0;
@@ -210,7 +264,34 @@ img {
     background-color: whitesmoke;
     border-radius: 10px;
 }
+.msg-received i {
+    box-shadow: -10px 10px 10px whitesmoke;
+    background-color: whitesmoke;
+}
 
+.msg-options {
+    height: 60px;
+    position: absolute;
+    top: 60%;
+    right: 5%;
+    background-color: white;
+    box-shadow: -5px 5px 5px lightgrey;
+    z-index: 999;
+    padding: 5px;
+    text-align: center;
+}
+.msg-options p {
+    font-size: 16px;
+    color: black;
+    margin-top: 5px;
+    float: none;
+}
+.msg-options p:hover {
+    cursor: pointer;
+}
+
+
+/* Regole per la barra di scrittura del messaggio*/
 .type-bar {
     width: 100%;
     height: 40px;
@@ -229,11 +310,4 @@ img {
     border: none;
     padding: 7px;
     border-radius: 5px;
-}
-
-.color {
-    color: #EAEAEA;
-    color: #DDF8C0;
-    color: #9FD8F8;
-    color: #479388;
 }

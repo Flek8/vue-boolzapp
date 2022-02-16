@@ -14,7 +14,7 @@
 
         <div class="section-left">
 
-            <div class="header">
+            <div class="header"> 
                 <div class="user">
                     <img src="img/avatar_io.jpg" height="40" alt="img profilo utente">
                     <h5>Nome Utente</h5>
@@ -54,6 +54,7 @@
                                 <h3>{{elemento.name}}</h3>
                                 <span>{{elemento.messages[elemento.messages.length - 1].text}}</span>
                             </div>
+                            <p>{{elemento.messages[elemento.messages.length - 1].date}}</p>
                         </div>
                     </div>
                 </div>
@@ -79,11 +80,17 @@
             </div>
 
             <div class="messages" >
-                <div class="msg-line" v-for="(msg,index) in elemento.messages">
+                <div class="msg-line" :class="msg.deleted == true?'hide':''" v-for="(msg,index) in elemento.messages">
                     <div class="msg" :class="msg.status == 'sent'?'msg-sent':'msg-received'">
                         <span>{{msg.text}}</span> <br>
                         <p>{{msg.date}}</p>
+                        <i class="fa-solid fa-angle-down" @click="mostraOpzioni(msg)"></i>
+                        <div class="msg-options" :class="msg.option == false?'hide':''">
+                            <p>Info messaggio</p> 
+                            <p @click="eliminaMessaggio(msg)">Elimina Messaggio</p>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
 
@@ -96,6 +103,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script>dayjs().format()</script>
+
     <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
